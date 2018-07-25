@@ -28,12 +28,12 @@ Vue.use(Vuetify, {
     transitions
   },
   theme: {
-    primary: '#579C87',
-    secondary: '#A1C181',
-    accent: '#FCCA46',
-    error: '#FF5252',
-    info: '#2196F3',
-    success: '#4CAF50',
-    warning: '#FFC107'
+    primary: '#EFF7F6', // 主色
+    secondary: '#78A1BB', // 副色
+    accent: '#FCFCFC', // 輔色
+    error: '#E95858', // 桃紅
+    success: '#78BB95', // 翠綠
+    warning: '#FFC107',
+    info: '#2196F3'
   },
 })

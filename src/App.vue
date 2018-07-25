@@ -31,9 +31,14 @@ export default {
   font-family: 'Lato', 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+  color: #283D3B
+  background-color: #EFF7F6
   // background-color: #A1C181
   // text-align: center
   // color: #2c3e50
+
+*
+  box-sizing: border-box
 
 .content
   margin-top: 64px
