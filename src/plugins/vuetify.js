@@ -7,9 +7,10 @@ import {
   VList,
   VBtn,
   VIcon,
+  VCarousel,
   VGrid,
+  VCard,
   VToolbar,
-  VJumbotron,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -22,9 +23,10 @@ Vue.use(Vuetify, {
     VList,
     VBtn,
     VIcon,
+    VCarousel,
     VGrid,
+    VCard,
     VToolbar,
-    VJumbotron,
     transitions
   },
   theme: {

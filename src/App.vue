@@ -2,7 +2,7 @@
   <div id="app">
     <v-app>
       <Header />
-      <v-content class="content">
+      <v-content>
         <router-view/>
       </v-content>
     </v-app>
@@ -26,6 +26,7 @@ export default {
 
 <style lang="sass">
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700')
+@import url('https://fonts.googleapis.com/earlyaccess/notosanstc.css')
 
 #app
   font-family: 'Lato', 'Avenir', Helvetica, Arial, sans-serif
@@ -33,9 +34,16 @@ export default {
   -moz-osx-font-smoothing: grayscale
   color: #283D3B
   background-color: #EFF7F6
-  // background-color: #A1C181
-  // text-align: center
-  // color: #2c3e50
+
+// @font-face
+//     font-family: custom-serif
+//     src: 'Noto Sans TC'
+//     unicode-range: U+4E00-9FFF
+
+// @font-face
+//     font-family: custom-serif
+//     src: 'Lato'
+//     unicode-range: U+00-024F
 
 *
   box-sizing: border-box

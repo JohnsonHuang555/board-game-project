@@ -1,5 +1,5 @@
 <template>
   <v-container>
-    ABOUT
+      CART
   </v-container>
 </template>

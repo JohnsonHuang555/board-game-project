@@ -1,5 +1,5 @@
 <template>
   <v-container>
-    ABOUT
+      GAMES
   </v-container>
 </template>
