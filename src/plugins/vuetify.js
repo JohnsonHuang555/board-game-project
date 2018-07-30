@@ -11,6 +11,9 @@ import {
   VGrid,
   VCard,
   VToolbar,
+  VSelect,
+  VSubheader,
+  VTextField,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -27,6 +30,9 @@ Vue.use(Vuetify, {
     VGrid,
     VCard,
     VToolbar,
+    VSelect,
+    VSubheader,
+    VTextField,
     transitions
   },
   theme: {

@@ -39,6 +39,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-
+nav
+  z-index: 999
 </style>
 

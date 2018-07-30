@@ -11,7 +11,7 @@
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.1.3",
+    "vuetify": "^1.1.8",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

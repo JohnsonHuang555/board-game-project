@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-lg>
     <v-layout row wrap class="mb-5">
-      <v-flex lg7 md7 xs12>
+      <v-flex md7 xs12>
         <v-carousel class="elevation-4">
           <v-carousel-item
             v-for="(img, i) in carouselImgs"
@@ -13,7 +13,7 @@
           </v-carousel-item>
         </v-carousel>
       </v-flex>
-      <v-flex lg5 md5 xs12>
+      <v-flex md5 xs12>
         <div class="news-header">
           <div class="news-title">最新消息</div>
           <div style="font-size: 14px">日期<v-icon small style="margin-left: 5px">sort</v-icon></div>
