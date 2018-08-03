@@ -2,7 +2,7 @@
   <v-toolbar
     fixed
     app
-    class="secondary"
+    class="primary"
     dark>
     <v-toolbar-title class="pl-3">
       <router-link to="/" tag="span" style="cursor: pointer">ECS</router-link>
@@ -31,7 +31,8 @@ export default {
         { title: 'HOME', to: '/' },
         { title: 'GAMES', to: '/games' },
         { title: 'CART', to: '/cart' },
-        { title: 'ABOUT', to: '/about' }
+        { title: 'ABOUT', to: '/about' },
+        { title: 'SIGN IN', to: '/signin' }
       ]
     }
   }

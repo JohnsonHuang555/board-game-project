@@ -14,6 +14,9 @@ import {
   VSelect,
   VSubheader,
   VTextField,
+  VDataTable,
+  VTooltip,
+  VCheckbox,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -33,14 +36,17 @@ Vue.use(Vuetify, {
     VSelect,
     VSubheader,
     VTextField,
+    VDataTable,
+    VTooltip,
+    VCheckbox,
     transitions
   },
   theme: {
-    primary: '#EFF7F6', // 主色
-    secondary: '#78A1BB', // 副色
-    accent: '#FCFCFC', // 輔色
-    error: '#E95858', // 桃紅
-    success: '#78BB95', // 翠綠
+    primary: '#78A1BB',
+    secondary: '#EFF7F6',
+    accent: '#78A1BB',
+    error: '#E95858',
+    success: '#78BB95',
     warning: '#FFC107',
     info: '#2196F3'
   },

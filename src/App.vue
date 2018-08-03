@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <Header />
+      <Header v-if="isShow"/>
       <v-content>
         <router-view/>
       </v-content>
@@ -15,6 +15,27 @@ import Header from '@/components/Header'
 export default {
   components: {
     Header
+  },
+  data () {
+    return {
+      isShow: true
+    }
+  },
+  mounted () {
+    // 當直接輸入網址時判斷是否為登入頁面
+    if (this.$router.currentRoute.name === 'signin') {
+      this.isShow = false
+    }
+  },
+  watch: {
+    // 當切換路由時判斷是否為登入頁面
+    '$route' (to) {
+      if (to.name === 'signin') {
+        this.isShow = false
+      } else {
+        this.isShow = true
+      }
+    }
   }
 }
 </script>

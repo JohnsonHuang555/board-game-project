@@ -24,7 +24,7 @@
     </v-card-title>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn flat color="secondary">MORE</v-btn>
+      <v-btn flat color="primary" to="/games/1">MORE</v-btn>
     </v-card-actions>
   </v-card>
 </template>

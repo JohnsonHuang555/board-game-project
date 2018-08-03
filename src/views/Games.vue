@@ -56,7 +56,7 @@
         <Game />
       </v-flex>
     </v-layout>
-    <v-layout>
+    <v-layout class="mb-2">
       <v-flex md3>
         <Game />
       </v-flex>
@@ -70,7 +70,7 @@
         <Game />
       </v-flex>
     </v-layout>
-    <v-layout>
+    <v-layout class="mb-2">
       <v-flex md3>
         <Game />
       </v-flex>
@@ -109,7 +109,5 @@ export default {
 
 .select-area
   display: flex
-//   justify-content: space-between
-//   & .select-title
-//     font-size: 14px
+
 </style>

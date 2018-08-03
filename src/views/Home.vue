@@ -132,8 +132,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-*
-  // border: 1px solid #000
+$color_white: #fefefe
+$border_radius: .2em
 
 .carousel-title
   position: absolute
@@ -158,8 +158,8 @@ export default {
   font-size: 16px
   padding: 22px
   position: relative
-  border-radius: 2px
-  background-color: #fff
+  border-radius: $border_radius
+  background-color: $color_white
   margin-bottom: 15px
   & .date
     position: absolute
@@ -169,13 +169,20 @@ export default {
 
 .more
   float: right
+  cursor: pointer
+  & i:hover
+    color: #78A1BB
+
+.more:hover
+  color: #78A1BB
 
 .type
   display: flex
   height: 200px
   justify-content: space-between
   padding: 20px
-  background-color: #fff
+  background-color: $color_white
+  border-radius: $border_radius
   & img
     max-width: 60%
 

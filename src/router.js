@@ -4,6 +4,8 @@ import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Games from './views/Games.vue'
 import Cart from './views/Cart.vue'
+import SignIn from './views/SignIn.vue'
+import GameDetail from './components/GameDetail.vue'
 
 Vue.use(Router)
 
@@ -20,6 +22,11 @@ export default new Router({
       component: Games
     },
     {
+      path: '/games/:id',
+      name: 'gameDetail',
+      component: GameDetail
+    },
+    {
       path: '/cart',
       name: 'cart',
       component: Cart
@@ -28,6 +35,11 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: About
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: SignIn
     },
   ]
 })
