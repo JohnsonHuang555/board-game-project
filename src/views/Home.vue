@@ -4,11 +4,11 @@
       <v-flex md7 xs12>
         <v-carousel class="elevation-4">
           <v-carousel-item
-            v-for="(img, i) in carouselImgs"
+            v-for="(game, i) in games"
             :key="i"
-            :src="img.src">
+            :src="game.thumbnail">
             <div class="carousel-title">
-              {{ img.title }}
+              {{ game.title }}
             </div>
           </v-carousel-item>
         </v-carousel>
@@ -18,22 +18,10 @@
           <div class="news-title">最新消息</div>
           <div style="font-size: 14px">日期<v-icon small style="margin-left: 5px">sort</v-icon></div>
         </div>
-        <div class="news-content elevation-3">
-          桌遊開團囉 2018-01-01dsfsf dffewfew fewfwf dsfsfdsff dfdfdsfs fdggsdsfdfs gfgfgreg ggggreg regre gregre
-          <span class="date">2018-10-10</span>
-        </div>
-        <div class="news-content elevation-3">
-          桌遊開團囉 2018-01-01
-          <span class="date">2018-10-10</span>
-        </div><div class="news-content elevation-3">
-          桌遊開團囉 2018-01-01
-          <span class="date">2018-10-10</span>
-        </div><div class="news-content elevation-3">
-          桌遊開團囉 2018-01-01
-          <span class="date">2018-10-10</span>
-        </div><div class="news-content elevation-3">
-          桌遊開團囉 2018-01-01
-          <span class="date">2018-10-10</span>
+        <div v-for="(newsInfo, i) in news" :key="i" class="news-content elevation-3">
+          <!-- 桌遊開團囉 2018-01-01dsfsf dffewfew fewfwf dsfsfdsff dfdfdsfs fdggsdsfdfs gfgfgreg ggggreg regre gregre -->
+          {{ newsInfo.content}}
+          <span class="date">{{ newsInfo.date }}</span>
         </div>
         <span class="more">
           More
@@ -76,17 +64,8 @@
     </div>
     <!-- 跑 foreach -->
     <v-layout row wrap class="mb-5">
-      <v-flex md3>
-        <Game />
-      </v-flex>
-      <v-flex md3>
-        <Game />
-      </v-flex>
-      <v-flex md3>
-        <Game />
-      </v-flex>
-      <v-flex md3>
-        <Game />
+      <v-flex v-for="(game, i) in newGames" :key="i" md3>
+        <Game :gameInfo="game"/>
       </v-flex>
     </v-layout>
     <div class="new-games">
@@ -95,17 +74,8 @@
     </div>
     <!-- 跑 foreach -->
     <v-layout row wrap class="mb-5">
-      <v-flex md3>
-        <Game />
-      </v-flex>
-      <v-flex md3>
-        <Game />
-      </v-flex>
-      <v-flex md3>
-        <Game />
-      </v-flex>
-      <v-flex md3>
-        <Game />
+      <v-flex v-for="(game, i) in hotGames" :key="i" md3>
+        <Game :gameInfo="game"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -121,11 +91,21 @@ export default {
   },
   data () {
     return {
-      carouselImgs: [
-        { src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg' , title: '印加寶藏'},
-        { src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg' , title: 'Bang!'},
-        { src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg' , title: '阿瓦隆'}
-      ],
+
+    }
+  },
+  computed: {
+    games () {
+      return this.$store.getters.featuredGames
+    },
+    news () {
+      return this.$store.getters.featuredNews
+    },
+    hotGames () {
+      return this.$store.getters.hotGames
+    },
+    newGames () {
+      return this.$store.getters.newGames
     }
   }
 }
@@ -183,8 +163,12 @@ $border_radius: .2em
   padding: 20px
   background-color: $color_white
   border-radius: $border_radius
+  cursor: pointer
   & img
     max-width: 60%
+
+.type:hover
+  opacity: 0.7
 
 .type-words
   & .cn
