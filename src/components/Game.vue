@@ -7,7 +7,7 @@
     </v-card-media>
     <v-card-title primary-title style="padding-top: 16px; position: relative;">
       <v-btn
-        color="success"
+        color="primary"
         dark
         small
         absolute
@@ -15,7 +15,7 @@
         right
         fab
       >
-        <v-icon>check</v-icon>
+        <v-icon>add</v-icon>
       </v-btn>
       <div>
         <h3 class="card-title mb-1">{{ game.title }}</h3>

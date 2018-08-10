@@ -83,6 +83,7 @@
 
 <script>
 import Game from '@/components/Game.vue'
+var moment = require('moment')
 
 export default {
   name: 'home',
@@ -102,10 +103,24 @@ export default {
       return this.$store.getters.featuredNews
     },
     hotGames () {
-      return this.$store.getters.hotGames
+      let games = []
+      let data = this.$store.getters.loadedGames
+
+      games = data.slice(0, 4).sort((itemA, itemB) => {
+        return itemA.star < itemB.star
+      })
+
+      return games
     },
     newGames () {
-      return this.$store.getters.newGames
+      let games = []
+      let data = this.$store.getters.loadedGames
+
+      games = data.slice(0, 4).sort((itemA, itemB) => {
+        return moment(itemA.time, "YYYY-MM-DD HH:mm") < moment(itemB.time, "YYYY-MM-DD HH:mm")
+      })
+      
+      return games
     }
   }
 }

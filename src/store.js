@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-var moment = require('moment')
 
 Vue.use(Vuex)
 
@@ -15,8 +14,8 @@ export default new Vuex.Store({
           子彈版合集包含了：基本第三版、日正當中(第一套限量版擴充集) 、道奇市(全新卡片及角色，並且可以讓8人同時遊戲)、
           一大票幫手(第二套限量版擴充集)……。 而純基本版目前發行至第四版。 每位玩家皆有各自扮演的人物及身分，為了不同的目標而奮戰，
           是非常知名的嘴炮遊戲，歡樂性十足。`,
-        thumbnail: 'https://media.taaze.tw/showLargeImage.html?sc=62100003746&width=587&height=546',
-        time: '2018/01/20',
+        thumbnail: 'http://pic.pimg.tw/bglctw/1430743737-284907824_n.jpg',
+        time: '2018-01-20 16:30',
         star: 4
       },
       {
@@ -29,7 +28,7 @@ export default new Vuex.Store({
         擁有劇毒的蛇……都將讓你只能丟下一切逃命。但是傳聞中無價的古印加神器就在這裡，只有能克服心理恐懼的人才有機會得到它！‍
         你究竟有多勇敢？要有多少的寶物才能夠滿足你？玩過印加寶藏後你才會知道！`,
         thumbnail: 'https://pic.pimg.tw/merrich999/1438921426-2198007271.jpg?v=1438921428',
-        time: '2018/04/06',
+        time: '2018-04-06 15:20',
         star: 3
       },
       {
@@ -40,7 +39,7 @@ export default new Vuex.Store({
         的家人去購買寵物、寵物籠子和食物等。沒有外出購物的小魔怪們則會幫忙照顧這些寵物，取悅它們，清洗他們的籠子以及觀察
         它們的生長情況。`,
         thumbnail: 'http://bghut.com/images/201707/goods_img/6250_G_1500636597469.jpg',
-        time: '2018/05/15',
+        time: '2018-05-15 11:00',
         star: 1
       },
       {
@@ -50,8 +49,20 @@ export default new Vuex.Store({
         description: `璀璨寶石桌上遊戲，擁有優雅華麗的美術風格，引領玩家進入文藝復興的歐洲地區，擁有最多的寶石將會吸引貴族前往投資。
         利用手上的資源獲取礦脈、運輸方式以及工匠，工匠將會把你手上的原石冶煉成完美無瑕的寶石！挑選你的寶石，購買發展卡，
         從而為你贏得紅利和聲望，紅利可以讓你購買到更具價值的發展卡，貴族的來訪可以讓你獲得更多的聲望，而聲望將決定最終的贏家！`,
-        thumbnail: 'http://bghut.com/images/201411/goods_img/4421_G_1416551550970.jpg',
-        time: '2018/10/10',
+        thumbnail: 'http://2.bp.blogspot.com/-jtyJlrEbAB4/UwBs3aHQM3I/AAAAAAAAQHw/rk6b9lpM-Wc/s1600/pic1904079_lg.jpg',
+        time: '2018-10-10 09:11',
+        star: 5
+      },
+      {
+        id: '5',
+        title: '阿瓦隆',
+        previewText: '抵抗組織：阿瓦隆是一款可以獨立運作的遊戲',
+        description: `正義與邪惡在阿瓦隆開始決戰，這關乎到人類未來的文明。亞瑟代表了不列顛的未來，以及對繁榮和榮譽的承諾，
+        但在他勇敢的戰士團當中卻藏匿著昧了良心的莫德雷德爪牙。這些邪惡勢力的人數雖少，但彼此了解對方，並盡力在亞瑟忠臣之間隱藏好邪惡的身份。
+        只有梅林知道誰才是邪惡爪牙，但他卻不能明講出來。這是因為如果梅林把自己真實身份暴露出來的話，正義方所付出的努力將會功虧一簣。
+        結果將會是「邪不勝正」，還是「魔高一丈」讓阿瓦隆落入邪惡的莫德雷德手中呢？`,
+        thumbnail: 'http://pic.pimg.tw/mj9981168/1428109639-501859503.jpg?v=1428109640',
+        time: '2018-10-10 09:11',
         star: 5
       }
     ],
@@ -92,27 +103,8 @@ export default new Vuex.Store({
     loadedGames (state) {
       return state.loadedGames
     },
-    originGames (state) {
-      return state.loadedGames
-    },
     featuredGames (state, getters) {
       return getters.loadedGames.slice(0, 5)
-    },
-    newGames (state, getters) {
-      var tempGames = []
-      tempGames = getters.originGames.sort((itemA, itemB) => {
-        return moment(itemA.time) < moment(itemB.time)
-      })
-
-      return tempGames.slice(0, 4)
-    },
-    hotGames (state, getters) {
-      var tempGames = []
-      tempGames = getters.originGames.sort((itemA, itemB) => {
-        return itemA.star < itemB.star
-      })
-
-      return tempGames.slice(0, 4)
     },
     loadedNews (state) {
       return state.loadedNews
