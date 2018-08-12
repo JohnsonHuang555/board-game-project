@@ -15,8 +15,11 @@ export default new Vuex.Store({
           一大票幫手(第二套限量版擴充集)……。 而純基本版目前發行至第四版。 每位玩家皆有各自扮演的人物及身分，為了不同的目標而奮戰，
           是非常知名的嘴炮遊戲，歡樂性十足。`,
         thumbnail: 'http://pic.pimg.tw/bglctw/1430743737-284907824_n.jpg',
-        time: '2018-01-20 16:30',
-        star: 4
+        time: '2018-01-20',
+        star: 3,
+        type: 'Strategy',
+        players: '2-7',
+        duration: '50分鐘'
       },
       {
         id: '2',
@@ -28,8 +31,11 @@ export default new Vuex.Store({
         擁有劇毒的蛇……都將讓你只能丟下一切逃命。但是傳聞中無價的古印加神器就在這裡，只有能克服心理恐懼的人才有機會得到它！‍
         你究竟有多勇敢？要有多少的寶物才能夠滿足你？玩過印加寶藏後你才會知道！`,
         thumbnail: 'https://pic.pimg.tw/merrich999/1438921426-2198007271.jpg?v=1438921428',
-        time: '2018-04-06 15:20',
-        star: 3
+        time: '2018-04-06',
+        star: 2,
+        type: 'Party',
+        players: '2-6',
+        duration: '20分鐘'
       },
       {
         id: '3',
@@ -39,8 +45,11 @@ export default new Vuex.Store({
         的家人去購買寵物、寵物籠子和食物等。沒有外出購物的小魔怪們則會幫忙照顧這些寵物，取悅它們，清洗他們的籠子以及觀察
         它們的生長情況。`,
         thumbnail: 'http://bghut.com/images/201707/goods_img/6250_G_1500636597469.jpg',
-        time: '2018-05-15 11:00',
-        star: 1
+        time: '2018-05-15',
+        star: 5,
+        type: 'Family',
+        players: '2-4',
+        duration: '40分鐘'
       },
       {
         id: '4',
@@ -50,8 +59,11 @@ export default new Vuex.Store({
         利用手上的資源獲取礦脈、運輸方式以及工匠，工匠將會把你手上的原石冶煉成完美無瑕的寶石！挑選你的寶石，購買發展卡，
         從而為你贏得紅利和聲望，紅利可以讓你購買到更具價值的發展卡，貴族的來訪可以讓你獲得更多的聲望，而聲望將決定最終的贏家！`,
         thumbnail: 'http://2.bp.blogspot.com/-jtyJlrEbAB4/UwBs3aHQM3I/AAAAAAAAQHw/rk6b9lpM-Wc/s1600/pic1904079_lg.jpg',
-        time: '2018-10-10 09:11',
-        star: 5
+        time: '2018-10-10',
+        star: 4,
+        type: 'Strategy',
+        players: '2-4',
+        duration: '60分鐘'
       },
       {
         id: '5',
@@ -62,8 +74,11 @@ export default new Vuex.Store({
         只有梅林知道誰才是邪惡爪牙，但他卻不能明講出來。這是因為如果梅林把自己真實身份暴露出來的話，正義方所付出的努力將會功虧一簣。
         結果將會是「邪不勝正」，還是「魔高一丈」讓阿瓦隆落入邪惡的莫德雷德手中呢？`,
         thumbnail: 'http://pic.pimg.tw/mj9981168/1428109639-501859503.jpg?v=1428109640',
-        time: '2018-10-10 09:11',
-        star: 5
+        time: '2018-11-12',
+        star: 3,
+        type: 'Strategy',
+        players: '2-10',
+        duration: '30分鐘'
       }
     ],
     loadedNews: [
@@ -111,6 +126,13 @@ export default new Vuex.Store({
     },
     featuredNews (state, getters) {
       return getters.loadedNews.slice(0, 5)
+    },
+    loadedGame (state) {
+      return (gameId) => {
+        return state.loadedGames.find((game) => {
+          return game.id === gameId
+        })
+      }
     }
   }
 })

@@ -2,45 +2,49 @@
   <v-container grid-list-lg>
     <v-layout row wrap class="game elevation-3">
       <v-flex md4 offset-md1 class="mt-4 mb-4">
-        <img class="elevation-3" src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" width="100%" alt="game-img">
-          <v-layout>
-            <v-flex md6>
-              <img class="elevation-3" src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" width="100%" alt="game-img">
-            </v-flex>
-            <v-flex md6>
-              <img class="elevation-3" src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" width="100%" alt="game-img">
-            </v-flex>
-          </v-layout>
+        <div class="thumbnail">
+          <img class="elevation-3" :src="game.thumbnail" alt="game-img">
+        </div>
+        <!-- <v-layout style="margin-bottom: 20px;">
+          <v-flex md6>
+            <img class="elevation-3" src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" width="100%" alt="game-img">
+          </v-flex>
+          <v-flex md6>
+            <img class="elevation-3" src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" width="100%" alt="game-img">
+          </v-flex>
+        </v-layout> -->
+        <div class="game-detail-frame">
+          <div id="game-detail">
+            <div class="game-detail-content">
+              <v-icon medium>event_available</v-icon>
+              <span>上架時間</span>
+              <span>{{ game.time }}</span>
+            </div>
+            <div class="game-detail-content">
+              <v-icon medium>person</v-icon>
+              <span>玩家人數</span>
+              <span>{{ game.players }}</span>
+            </div>
+            <div class="game-detail-content">
+              <v-icon medium>access_time</v-icon>
+              <span>遊玩歷時</span>
+              <span>{{ game.duration }}</span>
+            </div>
+          </div>
+        </div>
       </v-flex>
       <v-flex md6 class="mt-4 mb-4" style="padding: 0 20px">
-        <h1>印加寶藏</h1>
+        <h1>
+          <v-icon>local_offer</v-icon>
+          {{ game.title }}
+        </h1>
         <div id="game-intro">
           <div class="game-intro-title">- 遊戲簡介</div>
-          <div class="game-intro-content">Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Proin ligula nisi, pharetra nec eros vitae, mollis
-            placerat tellus. Donec vel quam hendrerit,
-            venenatis turpis quis, aliquam sapien.
+          <div class="game-intro-content">
+            {{ game.description }}
           </div>
         </div>
-        <div id="game-detail">
-          <div class="game-detail-title">- 桌遊資訊</div>
-          <!-- For loop -->
-          <div class="game-detail-content">
-            <v-icon medium>event_available</v-icon>
-            <span>上架時間</span>
-            <span>2015-10-10</span>
-          </div>
-          <div class="game-detail-content">
-            <v-icon medium>person</v-icon>
-            <span>玩家人數</span>
-            <span>2-5</span>
-          </div>
-          <div class="game-detail-content">
-            <v-icon medium>access_time</v-icon>
-            <span>遊玩歷時</span>
-            <span>30分鐘</span>
-          </div>
-        </div>
+        
         <v-btn large color="primary">ADD TO CART</v-btn>
       </v-flex>
     </v-layout>
@@ -49,7 +53,13 @@
 
 <script>
 export default {
-  name: 'gameDetail'
+  name: 'gameDetail',
+  props: ['id'],
+  computed: {
+    game () {
+      return this.$store.getters.loadedGame(this.id)
+    }
+  }
 }
 </script>
 
@@ -65,12 +75,12 @@ button
 
 #game-intro  
   & .game-intro-title
-    font-size: 20px
+    font-size: 22px
     margin-bottom: 10px
   & .game-intro-content
     line-height: 40px
-    font-size: 22px
-    margin-bottom: 10px
+    font-size: 20px
+    margin-bottom: 20px
 
 #game-detail
   display: flex
@@ -88,6 +98,19 @@ button
     & span
       font-size: 18px
       margin-right: 10px
+
+.game-detail-frame
+  display: flex
+  justify-content: center
+
+.thumbnail
+  margin-bottom: 20px
+  display: flex
+  justify-content: center
+
+img
+  max-height: 40vh
+  max-width: 100%
 
 h1
   font-weight: 500
