@@ -64,7 +64,7 @@ export default {
 *
   box-sizing: border-box
 
-.content
-  margin-top: 64px
-
+.container
+  @media only screen and (min-width: 1904px)
+    max-width: 1185px
 </style>

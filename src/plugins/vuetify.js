@@ -1,4 +1,5 @@
 import Vue from 'vue'
+
 import {
   Vuetify,
   VApp,
@@ -17,6 +18,7 @@ import {
   VDataTable,
   VTooltip,
   VCheckbox,
+  VAlert,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -39,6 +41,7 @@ Vue.use(Vuetify, {
     VDataTable,
     VTooltip,
     VCheckbox,
+    VAlert,
     transitions
   },
   theme: {

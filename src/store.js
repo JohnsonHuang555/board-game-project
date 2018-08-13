@@ -17,7 +17,7 @@ export default new Vuex.Store({
         thumbnail: 'http://pic.pimg.tw/bglctw/1430743737-284907824_n.jpg',
         time: '2018-01-20',
         star: 3,
-        type: 'Strategy',
+        type: 2,
         players: '2-7',
         duration: '50分鐘'
       },
@@ -33,7 +33,7 @@ export default new Vuex.Store({
         thumbnail: 'https://pic.pimg.tw/merrich999/1438921426-2198007271.jpg?v=1438921428',
         time: '2018-04-06',
         star: 2,
-        type: 'Party',
+        type: 1,
         players: '2-6',
         duration: '20分鐘'
       },
@@ -47,7 +47,7 @@ export default new Vuex.Store({
         thumbnail: 'http://bghut.com/images/201707/goods_img/6250_G_1500636597469.jpg',
         time: '2018-05-15',
         star: 5,
-        type: 'Family',
+        type: 3,
         players: '2-4',
         duration: '40分鐘'
       },
@@ -61,7 +61,7 @@ export default new Vuex.Store({
         thumbnail: 'http://2.bp.blogspot.com/-jtyJlrEbAB4/UwBs3aHQM3I/AAAAAAAAQHw/rk6b9lpM-Wc/s1600/pic1904079_lg.jpg',
         time: '2018-10-10',
         star: 4,
-        type: 'Strategy',
+        type: 2,
         players: '2-4',
         duration: '60分鐘'
       },
@@ -76,7 +76,7 @@ export default new Vuex.Store({
         thumbnail: 'http://pic.pimg.tw/mj9981168/1428109639-501859503.jpg?v=1428109640',
         time: '2018-11-12',
         star: 3,
-        type: 'Strategy',
+        type: 2,
         players: '2-10',
         duration: '30分鐘'
       }
@@ -106,10 +106,17 @@ export default new Vuex.Store({
         content: '本週桌遊因忘記把桌遊帶來所以暫停一次><"',
         date: '2018-02-10'
       }
-    ]
+    ],
+    rentCart: []
   },
   mutations: {
-
+    addToList (state, payload) {
+      state.rentCart.push(payload)
+    },
+    removeGame (state, payload) {
+      const index = state.rentCart.indexOf(payload)
+      state.rentCart.splice(index, 1)
+    }
   },
   actions: {
 

@@ -19,6 +19,7 @@
           <v-subheader>Type</v-subheader>
           <v-select
             :items="types"
+            :item-value="types.text"
             label="All"
             v-model="orderbyType"
             solo>
@@ -30,6 +31,7 @@
           <v-subheader>Sort By</v-subheader>
           <v-select
             :items="sortBy"
+            :item-value="sortBy.text"
             v-model="orderbySortby"
             label="All"
             solo>
@@ -67,8 +69,18 @@ export default {
   },
   data () {
     return {
-      types: [ 'All', 'Party', 'Strategy', 'Family' ],
-      sortBy: [ 'All' ,'AddedDate', 'Popularity' ],
+      // types: [ 'All', 'Party', 'Strategy', 'Family' ],
+      types: [
+        { text: 'All', value: 0},
+        { text: 'Party', value: 1},
+        { text: 'Strategy', value: 2},
+        { text: 'Family', value: 3},
+      ],
+      sortBy: [
+        { text: 'All', value: 0},
+        { text: 'AddedDate', value: 1},
+        { text: 'Popularity', value: 2},
+      ],
       queryString: '',
       orderbyType: '',
       orderbySortby: ''
@@ -78,11 +90,11 @@ export default {
     games () {
       let loadedGames = this.$store.getters.loadedGames
       let tempGames = []
-      if (this.orderbySortby === 'AddedDate') {
+      if (this.orderbySortby === 1) {
         tempGames = loadedGames.slice().sort((itemA, itemB) => {
           return moment(itemA.time) < moment(itemB.time)
         })
-      } else if (this.orderbySortby === 'Popularity') {
+      } else if (this.orderbySortby === 2) {
         tempGames = loadedGames.slice().sort((itemA, itemB) => {
           return itemA.star < itemB.star
         })
@@ -95,7 +107,7 @@ export default {
       })
 
       // 做類型篩選
-      if (this.orderbyType === '' || this.orderbyType === 'All') {
+      if (this.orderbyType === '' || this.orderbyType === 0) {
         return filterGames
       } else {
         return filterGames.filter((item) => {

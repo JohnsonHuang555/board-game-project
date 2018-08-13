@@ -117,7 +117,7 @@ export default {
       let data = this.$store.getters.loadedGames
 
       games = data.slice(0, 4).sort((itemA, itemB) => {
-        return moment(itemA.time, "YYYY-MM-DD HH:mm") < moment(itemB.time, "YYYY-MM-DD HH:mm")
+        return moment(itemA.time, "YYYY-MM-DD") < moment(itemB.time, "YYYY-MM-DD")
       })
       
       return games

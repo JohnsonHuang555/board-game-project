@@ -6,17 +6,36 @@
     >          
     </v-card-media>
     <v-card-title primary-title style="padding-top: 16px; position: relative;">
-      <v-btn
-        color="primary"
-        dark
-        small
-        absolute
-        top
-        right
-        fab
-      >
-        <v-icon>add</v-icon>
-      </v-btn>
+      <v-fab-transition>
+        <v-btn
+          v-show="isShowCheck"
+          color="primary"
+          dark
+          small
+          absolute
+          top
+          right
+          fab
+          @click="addToList"
+        >
+          <v-icon>add</v-icon>
+        </v-btn>
+      </v-fab-transition>
+      <v-fab-transition>
+        <v-btn
+          v-show="!isShowCheck"
+          color="success"
+          dark
+          small
+          absolute
+          top
+          right
+          fab
+          @click="addToList"
+        >
+          <v-icon>check</v-icon>
+        </v-btn>
+      </v-fab-transition>
       <div>
         <h3 class="card-title mb-1">{{ game.title }}</h3>
         <div class="card-pretext">{{ game.previewText }} ...</div>
@@ -30,6 +49,8 @@
 </template>
 
 <script>
+var _ = require('lodash')
+
 export default {
   name: 'game',
   props: {
@@ -39,9 +60,25 @@ export default {
       default: null
     }
   },
+  data () {
+    return {
+      isShowCheck: true
+    }
+  },
   computed: {
     game () {
       return this.gameInfo
+    }
+  },
+  methods: {
+    addToList () {
+      if (_.findIndex(this.$store.state.rentCart, (o) => { return o.id == this.game.id }) === -1) {
+          this.isShowCheck = false
+          this.$store.commit('addToList', this.game)
+        } else {
+          alert('已在租借清單中')
+          return
+        }
     }
   }
 }

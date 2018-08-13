@@ -66,13 +66,18 @@ export default {
         { text: '發佈日期', align: 'left', sortable: false, value: 'date' },
         { text: '內容', value: 'content', sortable: false }
       ],
-      news: [
-        { date:'2017-11-11', content: '桌遊開團囉~~ 2018-10-10123' },
-        { date:'2017-11-11', content: '桌遊開團囉~~ 2018-10-10' },
-        { date:'2017-11-11', content: '桌遊開團囉~~ 2018-10-10' },
-        { date:'2017-11-11', content: '桌遊開團囉~~ 2018-10-10' },
-        { date:'2017-11-11', content: '桌遊開團囉~~ 2018-10-10' }
-      ]
+      // news: [
+      //   { date:'2017-11-11', content: '桌遊開團囉~~ 2018-10-10123' },
+      //   { date:'2017-11-11', content: '桌遊開團囉~~ 2018-10-10' },
+      //   { date:'2017-11-11', content: '桌遊開團囉~~ 2018-10-10' },
+      //   { date:'2017-11-11', content: '桌遊開團囉~~ 2018-10-10' },
+      //   { date:'2017-11-11', content: '桌遊開團囉~~ 2018-10-10' }
+      // ]
+    }
+  },
+  computed: {
+    news () {
+      return this.$store.getters.loadedNews
     }
   }
 }

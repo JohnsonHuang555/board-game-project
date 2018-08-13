@@ -5,45 +5,39 @@
         <img src="../assets/dice.svg" width="512" height="512" alt="dice">
       </v-flex>
       <v-flex class="right" md4 offset-md1>
-        <div class="card-content">
-          <h1>Log In</h1>
-          <v-text-field
-            label="Email"
-            prepend-icon="mail"
-          ></v-text-field>
-          <v-text-field
-            label="Password"
-            prepend-icon="lock"
-            class="card-password"
-          ></v-text-field>
-          <div class="card-actions">
-            <v-checkbox
-              label="Remember me"
-              v-model="checkbox"
-            ></v-checkbox>
-            <span class="forgot-password">Forgot password ?</span>
-          </div>
-          <v-btn color="primary" large>Login</v-btn>
-          <div class="sign-up">Don't you have an account ? <span>Sign up</span></div>
-        </div>
+        <transition name="component-fade" mode="out-in">
+          <SignInTemplate @signUp="signHandler" v-if="isSignIn"/>
+          <SignUpTemplate @signIn="signHandler" v-else/>
+        </transition>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import SignInTemplate from '@/components/SignInTemplate.vue'
+import SignUpTemplate from '@/components/SignUpTemplate.vue'
+
 export default {
   name: 'signin',
+  components: {
+    SignInTemplate,
+    SignUpTemplate
+  },
   data () {
     return {
-      checkbox: false,
+      isSignIn: true
+    }
+  },
+  methods: {
+    signHandler (val) {
+      this.isSignIn = val
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-$color_primary: #78A1BB
 $color_white: #fefefe
 
 .card-container
@@ -65,39 +59,17 @@ $color_white: #fefefe
     display: flex
     justify-content: center
     align-items: center
-    & .card-content
-      width: 100%
-      & .card-actions
-        display: flex
-        justify-content: space-between
-        margin-bottom: 30px
-        & .forgot-password
-          margin-top: 20px
-          opacity: 0.7
-          font-size: 16px
-          cursor: pointer
-        & .forgot-password:hover
-          color: $color_primary
-      & button
-        margin-bottom: 20px
-      & .sign-up
-        font-size: 16px
-        opacity: 0.7
-        & span
-          margin-left: 10px
-          font-size: 20px
-          color: $color_primary
-          font-weight: 600
-          cursor: pointer
-        & span:hover
-          opacity: 0.7
-
-button
-  margin: 0
 
 h1
   font-weight: 500
   font-size: 36px
   margin-bottom: 60px
+
+.component-fade-enter-active, .component-fade-leave-active
+  transition: opacity .1s ease
+
+.component-fade-enter, .component-fade-leave-to
+  opacity: 0
+
 </style>
 

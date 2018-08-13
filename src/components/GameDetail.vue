@@ -45,19 +45,37 @@
           </div>
         </div>
         
-        <v-btn large color="primary">ADD TO CART</v-btn>
+        <v-btn large color="primary" @click="addToList" :disabled="isDisableAddToList">ADD TO CART</v-btn>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+var _ = require('lodash')
+
 export default {
   name: 'gameDetail',
   props: ['id'],
   computed: {
     game () {
       return this.$store.getters.loadedGame(this.id)
+    }
+  },
+  data () {
+    return {
+      isDisableAddToList: false
+    }
+  },
+  methods: {
+    addToList () {
+      if (_.findIndex(this.$store.state.rentCart, (o) => { return o.id == this.game.id }) === -1) {
+          this.$store.commit('addToList', this.game)
+          this.isDisableAddToList = true
+        } else {
+          alert('已在租借清單中')
+          return
+        }
     }
   }
 }
@@ -104,7 +122,7 @@ button
   justify-content: center
 
 .thumbnail
-  margin-bottom: 20px
+  margin-bottom: 30px
   display: flex
   justify-content: center
 
