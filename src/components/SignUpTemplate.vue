@@ -4,19 +4,23 @@
     <v-text-field
       label="Email"
       prepend-icon="mail"
+      v-model="email"
     ></v-text-field>
     <v-text-field
       label="Password"
       prepend-icon="lock"
+      v-model="password"
       type="password"
     ></v-text-field>
     <v-text-field
       label="Confirm Password"
       prepend-icon="vpn_key"
+      v-model="confirmPassword"
       type="password"
+      :rules="[comparePasswords]"
     ></v-text-field>
 
-    <v-btn color="primary" large>SIGN UP</v-btn>
+    <v-btn color="primary" large @click="onSignUp">SIGN UP</v-btn>
     <div class="sign-up">I've already have an account. <span @click="signIn">Sign in</span></div>
   </div>
 </template>
@@ -24,9 +28,24 @@
 <script>
 export default {
   name: 'signup-template',
+  data () {
+    return {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
+  },
+  computed: {
+    comparePasswords () {
+      return this.password !== this.confirmPassword ? 'Passwords do not match.': true
+    }
+  },
   methods: {
     signIn () {
       this.$emit('signIn', true)
+    },
+    onSignUp () {
+
     }
   }
 }
