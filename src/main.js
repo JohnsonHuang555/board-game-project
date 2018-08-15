@@ -6,9 +6,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
+import AlertCmp from './components/Shared/Alert.vue'
 
 Vue.config.productionTip = false
 // Vue.config.silent = true
+Vue.component('app-alert', AlertCmp)
 
 new Vue({
   router,

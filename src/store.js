@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import * as firebase from 'firebase'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -107,19 +107,84 @@ export default new Vuex.Store({
         date: '2018-02-10'
       }
     ],
-    rentCart: []
+    user: null,
+    loading: false,
+    error: null
   },
   mutations: {
     addToList (state, payload) {
-      state.rentCart.push(payload)
+      state.user.rentCart.push(payload)
     },
     removeGame (state, payload) {
-      const index = state.rentCart.indexOf(payload)
-      state.rentCart.splice(index, 1)
+      const index = state.user.rentCart.indexOf(payload)
+      state.user.rentCart.splice(index, 1)
+    },
+    setUser (state, payload) {
+      state.user = payload
+    },
+    setLoading (state, payload) {
+      state.loading = payload
+    },
+    setError (state, payload) {
+      state.error = payload
+    },
+    clearError (state) {
+      state.error = null
     }
   },
   actions: {
-
+    signUserUp ({commit}, payload) {
+      commit('setLoading', true)
+      commit('clearError')
+      firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          user => {
+            commit('setLoading', false)
+            const newUser = {
+              id: user.uid,
+              rentCart: []
+            }
+            commit('setUser', newUser)
+          }
+        )
+        .catch(
+          error => {
+            console.log(error)
+            setTimeout(() => {
+              commit('setLoading', false)
+              commit('setError', error)
+            }, 3000);
+          }
+        )
+    },
+    signUserIn ({commit}, payload) {
+      commit('setLoading', true)
+      commit('clearError')
+      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          user => {
+            commit('setLoading', false)
+            const newUser = {
+              id: user.uid,
+              rentCart: []
+            }
+            commit('setUser', newUser)
+          }
+        )
+        .catch(
+          error => {
+            console.log(error, 'ddd')
+            setTimeout(() => {
+              commit('setLoading', false)
+              commit('setError', error)
+              
+            }, 3000);
+          }
+        )
+    },
+    clearError ({commit}) {
+      commit('clearError')
+    }
   },
   getters: {
     loadedGames (state) {
@@ -140,6 +205,15 @@ export default new Vuex.Store({
           return game.id === gameId
         })
       }
+    },
+    user (state) {
+      return state.user
+    },
+    loading (state) {
+      return state.loading
+    },
+    error (state) {
+      return state.error
     }
   }
 })

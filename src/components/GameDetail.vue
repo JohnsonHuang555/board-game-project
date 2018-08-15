@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     addToList () {
-      if (_.findIndex(this.$store.state.rentCart, (o) => { return o.id == this.game.id }) === -1) {
+      if (_.findIndex(this.$store.state.user.rentCart, (o) => { return o.id == this.game.id }) === -1) {
           this.$store.commit('addToList', this.game)
           this.isDisableAddToList = true
         } else {

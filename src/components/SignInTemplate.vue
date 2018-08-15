@@ -1,24 +1,29 @@
 <template>
   <div class="card-content">
-    <h1>Log In</h1>
-    <v-text-field
-      label="Email"
-      prepend-icon="mail"
-    ></v-text-field>
-    <v-text-field
-      label="Password"
-      prepend-icon="lock"
-      class="card-password"
-    ></v-text-field>
-    <div class="card-actions">
-      <v-checkbox
-        label="Remember me"
-        v-model="checkbox"
-      ></v-checkbox>
-      <span class="forgot-password">Forgot password ?</span>
-    </div>
-    <v-btn color="primary" large>Login</v-btn>
-    <div class="sign-up">Don't you have an account ? <span @click="signUp">Sign up</span></div>
+    <form @submit.prevent="onSignIn">
+      <h1>Log In</h1>
+      <v-text-field
+        label="Email"
+        prepend-icon="mail"
+        v-model="email"
+      ></v-text-field>
+      <v-text-field
+        label="Password"
+        prepend-icon="lock"
+        class="card-password"
+        v-model="password"
+        type="password"
+      ></v-text-field>
+      <div class="card-actions">
+        <v-checkbox
+          label="Remember me"
+          v-model="checkbox"
+        ></v-checkbox>
+        <span class="forgot-password">Forgot password ?</span>
+      </div>
+      <v-btn color="primary" large type="submit">Login</v-btn>
+      <div class="sign-up">Don't you have an account ? <span @click="signUp">Sign up</span></div>
+    </form>
   </div>
 </template>
 
@@ -28,11 +33,28 @@ export default {
   data () {
     return {
       checkbox: false,
+      email:'',
+      password: ''
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.getters.user
+    }
+  },
+  watch: {
+    user (val) {
+      if (val !== null && val !== undefined) {
+        this.$router.push('/')
+      }
     }
   },
   methods: {
     signUp () {
       this.$emit('signUp', false)
+    },
+    onSignIn () {
+      this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
     }
   }
 }

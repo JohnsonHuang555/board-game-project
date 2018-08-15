@@ -26,16 +26,33 @@
 export default {
   data () {
     return {
-      homeTitle: 'ECS',
-      menuItems: [
+      homeTitle: 'ECS'
+    }
+  },
+  computed: {
+    menuItems () {
+      let menuItems = [
         { title: 'HOME', to: '/' },
         { title: 'GAMES', to: '/games' },
         { title: 'CART', to: '/cart' },
         { title: 'ABOUT', to: '/about' },
         { title: 'SIGN IN', to: '/signin' }
       ]
+      if (this.userIsAuthenticated) {
+        menuItems = [
+          { title: 'HOME', to: '/' },
+          { title: 'GAMES', to: '/games' },
+          { title: 'CART', to: '/cart' },
+          { title: 'ABOUT', to: '/about' },
+        ]
+      }
+
+      return menuItems
+    },
+    userIsAuthenticated () {
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
     }
-  }
+  },
 }
 </script>
 

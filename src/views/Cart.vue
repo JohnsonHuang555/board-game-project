@@ -75,7 +75,7 @@ export default {
   },
   computed: {
     games () {
-      return this.$store.state.rentCart
+      return this.$store.state.user.rentCart
     },
   },
   methods: {
@@ -85,7 +85,7 @@ export default {
     convertTimes () {
       var vm = this
       const now = moment()
-      return moment(now, "YYYY-MM-DD").add('days', vm.rentDays).format("YYYY-MM-DD")
+      return moment(now, "YYYY-MM-DD").add(vm.rentDays, 'days').format("YYYY-MM-DD")
     }
   }
 }
