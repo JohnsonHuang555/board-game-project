@@ -1,6 +1,6 @@
 import '@babel/polyfill'
 import Vue from 'vue'
-import { initializeApp } from 'firebase'
+import { initializeApp, auth } from 'firebase'
 import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
@@ -24,5 +24,12 @@ new Vue({
       projectId: "rent-app-e75f5",
       storageBucket: "rent-app-e75f5.appspot.com",
     })
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user, 'user')
+        this.$store.dispatch('autoSignIn', user)
+      }
+    })
+    this.$store.dispatch('loadedGames')
   }
 }).$mount('#app')

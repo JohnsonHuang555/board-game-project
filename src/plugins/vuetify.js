@@ -19,6 +19,7 @@ import {
   VTooltip,
   VCheckbox,
   VAlert,
+  VProgressCircular,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
@@ -42,6 +43,7 @@ Vue.use(Vuetify, {
     VTooltip,
     VCheckbox,
     VAlert,
+    VProgressCircular,
     transitions
   },
   theme: {

@@ -6,6 +6,7 @@ import Games from './views/Games.vue'
 import Cart from './views/Cart.vue'
 import SignIn from './views/SignIn.vue'
 import GameDetail from './components/GameDetail.vue'
+import AuthGuard from './auth-guard'
 
 Vue.use(Router)
 
@@ -30,7 +31,8 @@ export default new Router({
     {
       path: '/cart',
       name: 'cart',
-      component: Cart
+      component: Cart,
+      beforeEnter: AuthGuard
     },
     {
       path: '/about',

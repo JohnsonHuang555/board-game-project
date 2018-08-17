@@ -1,8 +1,15 @@
 <template>
   <v-container grid-list-lg>
     <v-layout row wrap class="mb-5">
-      <v-flex md7 xs12>
-        <v-carousel class="elevation-4">
+      <v-flex md7 xs12 class="progress-carousel">
+        <v-progress-circular
+          indeterminate
+          :width="7"
+          :size="70"
+          color="primary"
+          v-if="loading"
+        ></v-progress-circular>
+        <v-carousel class="elevation-4" v-if="!loading">
           <v-carousel-item
             v-for="(game, i) in games"
             :key="i"
@@ -106,21 +113,24 @@ export default {
       let games = []
       let data = this.$store.getters.loadedGames
 
-      games = data.slice(0, 4).sort((itemA, itemB) => {
+      games = data.slice().sort((itemA, itemB) => {
         return itemA.star < itemB.star
       })
 
-      return games
+      return games.slice(0, 4)
     },
     newGames () {
       let games = []
       let data = this.$store.getters.loadedGames
 
-      games = data.slice(0, 4).sort((itemA, itemB) => {
+      games = data.slice().sort((itemA, itemB) => {
         return moment(itemA.time, "YYYY-MM-DD") < moment(itemB.time, "YYYY-MM-DD")
       })
       
-      return games
+      return games.slice(0, 4)
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   }
 }
@@ -129,6 +139,11 @@ export default {
 <style lang="sass" scoped>
 $color_white: #fefefe
 $border_radius: .2em
+
+.progress-carousel
+  display: flex
+  justify-content: center
+  align-items: center
 
 .carousel-title
   position: absolute

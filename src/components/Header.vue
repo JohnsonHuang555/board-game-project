@@ -17,7 +17,13 @@
         exact
         router>
         {{ item.title }}
-      </v-btn>      
+      </v-btn>
+      <v-btn
+        flat
+        @click="onLogout"
+        v-if="userIsAuthenticated" >
+        LOG OUT
+      </v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -34,7 +40,6 @@ export default {
       let menuItems = [
         { title: 'HOME', to: '/' },
         { title: 'GAMES', to: '/games' },
-        { title: 'CART', to: '/cart' },
         { title: 'ABOUT', to: '/about' },
         { title: 'SIGN IN', to: '/signin' }
       ]
@@ -53,6 +58,13 @@ export default {
       return this.$store.getters.user !== null && this.$store.getters.user !== undefined
     }
   },
+  methods: {
+    onLogout () {
+      this.$store.dispatch('logout')
+      this.$router.push('/')
+
+    }
+  }
 }
 </script>
 

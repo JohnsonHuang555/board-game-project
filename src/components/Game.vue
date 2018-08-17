@@ -72,7 +72,12 @@ export default {
   },
   methods: {
     addToList () {
-      if (_.findIndex(this.$store.state.user.rentCart, (o) => { return o.id == this.game.id }) === -1) {
+      if (this.$store.getters.user === null) {
+        this.$router.push('/signin')
+        return
+      }
+
+      if (_.findIndex(this.$store.getters.user.rentCart, (o) => { return o.id == this.game.id }) === -1) {
           this.isShowCheck = false
           this.$store.commit('addToList', this.game)
         } else {
@@ -87,7 +92,9 @@ export default {
 <style lang="sass" scoped>
 .card-title
   font-size: 20px
+  letter-spacing: 3px
 
 .card-pretext
   font-size: 14px
+  letter-spacing: 3px
 </style>
