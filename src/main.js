@@ -26,10 +26,10 @@ new Vue({
     })
     auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(user, 'user')
         this.$store.dispatch('autoSignIn', user)
       }
     })
     this.$store.dispatch('loadedGames')
+    this.$store.dispatch('loadedNews')
   }
 }).$mount('#app')

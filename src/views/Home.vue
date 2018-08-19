@@ -21,19 +21,29 @@
         </v-carousel>
       </v-flex>
       <v-flex md5 xs12>
-        <div class="news-header">
-          <div class="news-title">最新消息</div>
-          <div style="font-size: 14px">日期<v-icon small style="margin-left: 5px">sort</v-icon></div>
+        <div class="progress-carousel">
+          <v-progress-circular
+            indeterminate
+            :width="7"
+            :size="70"
+            color="primary"
+            v-if="loading"
+          ></v-progress-circular>
         </div>
-        <div v-for="(newsInfo, i) in news" :key="i" class="news-content elevation-3">
-          <!-- 桌遊開團囉 2018-01-01dsfsf dffewfew fewfwf dsfsfdsff dfdfdsfs fdggsdsfdfs gfgfgreg ggggreg regre gregre -->
-          {{ newsInfo.content}}
-          <span class="date">{{ newsInfo.date }}</span>
+        <div v-if="!loading">
+          <div class="news-header">
+            <div class="news-title">最新消息</div>
+            <div style="font-size: 14px">日期<v-icon small style="margin-left: 5px">sort</v-icon></div>
+          </div>
+          <div v-for="(newsInfo, i) in news" :key="i" class="news-content elevation-3">
+            {{ newsInfo.content}}
+            <span class="date">{{ newsInfo.date }}</span>
+          </div>
+          <span class="more" @click.prevent="seeMore">
+            More
+            <v-icon small>arrow_forward</v-icon>
+          </span>
         </div>
-        <span class="more">
-          More
-          <v-icon small>arrow_forward</v-icon>
-        </span>
       </v-flex>
     </v-layout>
     <v-layout row wrap class="mb-5">
@@ -131,6 +141,11 @@ export default {
     },
     loading () {
       return this.$store.getters.loading
+    }
+  },
+  methods: {
+    seeMore () {
+      this.$router.push('/about')
     }
   }
 }
