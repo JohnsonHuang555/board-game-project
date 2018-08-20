@@ -8,7 +8,11 @@ export default new Vuex.Store({
   state: {
     loadedGames: [],
     loadedNews: [],
-    user: null,
+    user: {
+      id: 0,
+      account: '',
+      rentCart: []
+    },
     loading: false,
     error: null,
   },
@@ -107,6 +111,7 @@ export default new Vuex.Store({
             commit('setLoading', false)
             const newUser = {
               id: user.uid,
+              account: user.email,
               rentCart: []
             }
             commit('setUser', newUser)
@@ -131,6 +136,7 @@ export default new Vuex.Store({
             commit('setLoading', false)
             const newUser = {
               id: user.uid,
+              account: user.email,
               rentCart: []
             }
             commit('setUser', newUser)
@@ -147,11 +153,11 @@ export default new Vuex.Store({
         )
     },
     autoSignIn ({commit}, payload) {
-      commit('setUser', {id: payload.uid, rentCart: []})
+      commit('setUser', {id: payload.uid, account: payload.email, rentCart: []})
     },
     logout ({commit}) {
       firebase.auth().signOut()
-      commit('setUser', null)
+      commit('setUser', { id: 0, account: '', rentCart: [] })
     },
     clearError ({commit}) {
       commit('clearError')

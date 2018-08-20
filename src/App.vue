@@ -2,8 +2,13 @@
   <div id="app">
     <v-app>
       <Header v-if="isShow"/>
-      <v-content>
-        <router-view/>
+        <v-content>
+          <transition
+          name="fade"
+          mode="out-in"
+        >
+          <router-view/>
+        </transition>
       </v-content>
     </v-app>
   </div>
@@ -67,4 +72,15 @@ export default {
 .container
   @media only screen and (min-width: 1904px)
     max-width: 1185px
+
+.fade-enter-active,
+.fade-leave-active
+  transition-duration: 0.2s
+  transition-property: opacity
+  transition-timing-function: ease
+
+.fade-enter,
+.fade-leave-active
+  opacity: 0
+
 </style>

@@ -31,7 +31,6 @@
           top
           right
           fab
-          @click="addToList"
         >
           <v-icon>check</v-icon>
         </v-btn>
@@ -62,12 +61,18 @@ export default {
   },
   data () {
     return {
-      isShowCheck: true
+      
     }
   },
   computed: {
     game () {
       return this.gameInfo
+    },
+    isShowCheck () {
+      if (_.findIndex(this.$store.getters.user.rentCart, (o) => { return o.id == this.game.id }) === -1) 
+        return true
+      else 
+        return false     
     }
   },
   methods: {
@@ -77,13 +82,7 @@ export default {
         return
       }
 
-      if (_.findIndex(this.$store.getters.user.rentCart, (o) => { return o.id == this.game.id }) === -1) {
-          this.isShowCheck = false
-          this.$store.commit('addToList', this.game)
-        } else {
-          alert('已在租借清單中')
-          return
-        }
+      this.$store.commit('addToList', this.game)
     }
   }
 }

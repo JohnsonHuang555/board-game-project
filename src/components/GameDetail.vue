@@ -60,22 +60,22 @@ export default {
   computed: {
     game () {
       return this.$store.getters.loadedGame(this.id)
+    },
+    isDisableAddToList () {
+      if (_.findIndex(this.$store.getters.user.rentCart, (o) => { return o.id == this.game.id }) === -1) 
+        return false     
+      else 
+        return true
     }
   },
   data () {
     return {
-      isDisableAddToList: false
+
     }
   },
   methods: {
     addToList () {
-      if (_.findIndex(this.$store.state.user.rentCart, (o) => { return o.id == this.game.id }) === -1) {
-          this.$store.commit('addToList', this.game)
-          this.isDisableAddToList = true
-        } else {
-          alert('已在租借清單中')
-          return
-        }
+      this.$store.commit('addToList', this.game)
     }
   }
 }

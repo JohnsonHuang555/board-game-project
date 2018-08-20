@@ -19,6 +19,9 @@ import {
   VTooltip,
   VCheckbox,
   VAlert,
+  VAvatar,
+  VMenu,
+  VDialog,
   VProgressCircular,
   transitions
 } from 'vuetify'
@@ -43,6 +46,9 @@ Vue.use(Vuetify, {
     VTooltip,
     VCheckbox,
     VAlert,
+    VAvatar,
+    VMenu,
+    VDialog,
     VProgressCircular,
     transitions
   },

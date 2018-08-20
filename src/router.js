@@ -5,6 +5,7 @@ import About from './views/About.vue'
 import Games from './views/Games.vue'
 import Cart from './views/Cart.vue'
 import SignIn from './views/SignIn.vue'
+import Profile from './views/Profile.vue'
 import GameDetail from './components/GameDetail.vue'
 import AuthGuard from './auth-guard'
 
@@ -43,6 +44,11 @@ export default new Router({
       path: '/signin',
       name: 'signin',
       component: SignIn
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
     },
   ]
 })

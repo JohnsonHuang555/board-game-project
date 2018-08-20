@@ -1,15 +1,18 @@
 <template>
   <v-container grid-list-lg>
-    <v-layout row wrap class="mb-5">
-      <v-flex md7 xs12 class="progress-carousel">
+    <v-layout row v-if="loading">
+      <v-flex md12 class="set-center">
         <v-progress-circular
           indeterminate
           :width="7"
           :size="70"
           color="primary"
-          v-if="loading"
         ></v-progress-circular>
-        <v-carousel class="elevation-4" v-if="!loading">
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap class="mb-5" v-if="!loading">
+      <v-flex md7 xs12>
+        <v-carousel class="elevation-4">
           <v-carousel-item
             v-for="(game, i) in games"
             :key="i"
@@ -21,29 +24,18 @@
         </v-carousel>
       </v-flex>
       <v-flex md5 xs12>
-        <div class="progress-carousel">
-          <v-progress-circular
-            indeterminate
-            :width="7"
-            :size="70"
-            color="primary"
-            v-if="loading"
-          ></v-progress-circular>
+        <div class="news-header">
+          <div class="news-title">最新消息</div>
+          <div style="font-size: 14px">日期<v-icon small style="margin-left: 5px">sort</v-icon></div>
         </div>
-        <div v-if="!loading">
-          <div class="news-header">
-            <div class="news-title">最新消息</div>
-            <div style="font-size: 14px">日期<v-icon small style="margin-left: 5px">sort</v-icon></div>
-          </div>
-          <div v-for="(newsInfo, i) in news" :key="i" class="news-content elevation-3">
-            {{ newsInfo.content}}
-            <span class="date">{{ newsInfo.date }}</span>
-          </div>
-          <span class="more" @click.prevent="seeMore">
-            More
-            <v-icon small>arrow_forward</v-icon>
-          </span>
+        <div v-for="(newsInfo, i) in news" :key="i" class="news-content elevation-3">
+          {{ newsInfo.content}}
+          <span class="date">{{ newsInfo.date }}</span>
         </div>
+        <span class="more" @click.prevent="seeMore">
+          More
+          <v-icon small>arrow_forward</v-icon>
+        </span>
       </v-flex>
     </v-layout>
     <v-layout row wrap class="mb-5">
@@ -155,7 +147,7 @@ export default {
 $color_white: #fefefe
 $border_radius: .2em
 
-.progress-carousel
+.set-center
   display: flex
   justify-content: center
   align-items: center
