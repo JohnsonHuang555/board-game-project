@@ -34,20 +34,20 @@
         <div class="page-title">活動照片</div>
       </v-flex>
     </v-layout>
-    <v-layout class="mb-3">
-      <v-flex md4>
+    <v-layout class="mb-3" row wrap>
+      <v-flex md4 xs12>
         <div class="highlight elevation-3">
           <span class="highlight-date">2017-10-12</span>
           <img src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" height="100%" width="100%" alt="highlight">
         </div>
       </v-flex>
-      <v-flex md4>
+      <v-flex md4 xs12>
         <div class="highlight elevation-3">
           <span class="highlight-date">2017-11-12</span>
           <img src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" height="100%" width="100%" alt="highlight">
         </div>
       </v-flex>
-      <v-flex md4>
+      <v-flex md4 xs12>
         <div class="highlight elevation-3">
           <span class="highlight-date">2017-12-12</span>
           <img src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" height="100%" width="100%" alt="highlight">

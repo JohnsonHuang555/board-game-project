@@ -39,8 +39,8 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap class="mb-5">
-      <v-flex md4>
-        <div class="type elevation-3">
+      <v-flex md4 xs12>
+        <div class="type elevation-3" @click="classify(1)">
           <div class="type-words">
             <div class="cn">派對</div>
             <div class="en">Party Game</div>
@@ -48,8 +48,8 @@
           <img src="../assets/party-type.svg" alt="Party Games">
         </div>
       </v-flex>
-      <v-flex md4>
-        <div class="type elevation-3">
+      <v-flex md4 xs12>
+        <div class="type elevation-3" @click="classify(2)">
           <div class="type-words">
             <div class="cn">策略</div>
             <div class="en">Strategy Game</div>
@@ -57,8 +57,8 @@
           <img src="../assets/strategy-type.svg" alt="Strategy Games">
         </div>
       </v-flex>
-      <v-flex md4>
-        <div class="type elevation-3">
+      <v-flex md4 xs12>
+        <div class="type elevation-3" @click="classify(3)">
           <div class="type-words">
             <div class="cn">家庭</div>
             <div class="en">Family Game</div>
@@ -73,7 +73,7 @@
     </div>
     <!-- 跑 foreach -->
     <v-layout row wrap class="mb-5">
-      <v-flex v-for="(game, i) in newGames" :key="i" md3>
+      <v-flex v-for="(game, i) in newGames" :key="i" md3 xs12>
         <Game :gameInfo="game"/>
       </v-flex>
     </v-layout>
@@ -83,7 +83,7 @@
     </div>
     <!-- 跑 foreach -->
     <v-layout row wrap class="mb-5">
-      <v-flex v-for="(game, i) in hotGames" :key="i" md3>
+      <v-flex v-for="(game, i) in hotGames" :key="i" md3 xs12>
         <Game :gameInfo="game"/>
       </v-flex>
     </v-layout>
@@ -138,6 +138,10 @@ export default {
   methods: {
     seeMore () {
       this.$router.push('/about')
+    },
+    classify (val) {
+      this.$store.commit('setFilterby', val)
+      this.$router.push('/games')
     }
   }
 }

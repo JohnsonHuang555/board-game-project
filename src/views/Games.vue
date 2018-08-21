@@ -1,44 +1,45 @@
 <template>
   <v-container grid-list-lg>
-    <v-btn
-      color="error"
-      dark
-      fixed
-      right
-      bottom
-      fab
-      >
-      <v-icon>keyboard_arrow_up</v-icon>
-    </v-btn>
-    <v-layout>
-      <v-flex md3>
+    <v-fab-transition>
+      <v-btn
+        color="error"
+        dark
+        fixed
+        right
+        bottom
+        fab
+        @click="$vuetify.goTo(target, options)"
+        v-if="scrollSettings.offsetTop > 300">
+        <v-icon>keyboard_arrow_up</v-icon>
+      </v-btn>
+    </v-fab-transition>
+    <v-layout row wrap v-scroll="onScroll">
+      <v-flex md3 xs12>
         <div class="page-title">桌遊清單</div>
       </v-flex>
-      <v-flex md3>
+      <v-flex md3 xs12>
         <div class="select-area">
           <v-subheader>Type</v-subheader>
           <v-select
             :items="types"
             :item-value="types.text"
-            label="All"
-            v-model="orderbyType"
+            v-model="filterbyType"
             solo>
           </v-select>
         </div>
       </v-flex>
-      <v-flex md3>
+      <v-flex md3 xs12>
         <div class="select-area">
           <v-subheader>Sort By</v-subheader>
           <v-select
             :items="sortBy"
             :item-value="sortBy.text"
             v-model="orderbySortby"
-            label="All"
             solo>
           </v-select>
         </div>
       </v-flex>
-      <v-flex md3>
+      <v-flex md3 xs12>
         <v-text-field
           solo
           v-model="queryString"
@@ -48,7 +49,8 @@
       </v-flex>
     </v-layout>
     <transition-group name="list-complete" tag="div" class="layout row wrap">
-      <v-flex md3
+      <v-flex
+        md3 xs12
         v-for="game in games"
         :key="game.id"
         class="list-complete-item">
@@ -69,7 +71,6 @@ export default {
   },
   data () {
     return {
-      // types: [ 'All', 'Party', 'Strategy', 'Family' ],
       types: [
         { text: 'All', value: 0},
         { text: 'Party', value: 1},
@@ -82,9 +83,25 @@ export default {
         { text: 'Popularity', value: 2},
       ],
       queryString: '',
-      orderbyType: '',
-      orderbySortby: ''
+      filterbyType: 0,
+      orderbySortby: 0,
+      scrollSettings: {
+        offsetTop: 0,
+        type: 'number',
+        number: 0,
+        offset: 0,
+        duration: 300,
+        easing: 'easeInOutCubic'
+      }
     }
+  },
+  watch: {
+    filterbyType (val) {
+      this.$store.commit('setFilterby', val)
+    }
+  },
+  mounted () {
+    this.filterbyType = this.filterbyTypeFromVuex
   },
   computed: {
     games () {
@@ -107,14 +124,34 @@ export default {
       })
 
       // 做類型篩選
-      if (this.orderbyType === '' || this.orderbyType === 0) {
+      if (this.filterbyTypeFromVuex === '' || this.filterbyTypeFromVuex === 0) {
         return filterGames
       } else {
         return filterGames.filter((item) => {
-          return item.type === this.orderbyType
+          return item.type === this.filterbyTypeFromVuex
         })
       }
 
+    },
+    filterbyTypeFromVuex () {
+      return this.$store.getters.filterbyType
+    },
+    target () {
+      const value = this.scrollSettings[this.scrollSettings.type]
+      if (!isNaN(value)) return Number(value)
+      else return value
+    },
+    options () {
+      return {
+        duration: this.scrollSettings.duration,
+        offset: this.scrollSettings.offset,
+        easing: this.scrollSettings.easing
+      }
+    }
+  },
+  methods: {
+    onScroll () {
+      this.scrollSettings.offsetTop = window.pageYOffset || document.documentElement.scrollTop
     }
   }
 }

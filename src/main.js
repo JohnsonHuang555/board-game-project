@@ -8,11 +8,13 @@ import store from './store'
 import './registerServiceWorker'
 import AlertCmp from './components/Shared/Alert.vue'
 import DialogCmp from './components/Shared/Dialog.vue'
+import SnackbarCmp from './components/Shared/Snackbar.vue'
 
 Vue.config.productionTip = false
 // Vue.config.silent = true
 Vue.component('app-alert', AlertCmp)
 Vue.component('app-dialog', DialogCmp)
+Vue.component('app-snackbar', SnackbarCmp)
 
 new Vue({
   router,

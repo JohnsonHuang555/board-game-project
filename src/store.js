@@ -15,6 +15,7 @@ export default new Vuex.Store({
     },
     loading: false,
     error: null,
+    filterbyType: 0 // All
   },
   mutations: {
     setLoadedGames (state, payload) {
@@ -41,6 +42,12 @@ export default new Vuex.Store({
     },
     clearError (state) {
       state.error = null
+    },
+    clearRentCart (state) {
+      state.user.rentCart = []
+    },
+    setFilterby (state, payload) {
+      state.filterbyType = payload
     }
   },
   actions: {
@@ -161,6 +168,9 @@ export default new Vuex.Store({
     },
     clearError ({commit}) {
       commit('clearError')
+    },
+    clearRentCart ({commit}) {
+      commit('clearRentCart')
     }
   },
   getters: {
@@ -191,6 +201,9 @@ export default new Vuex.Store({
     },
     error (state) {
       return state.error
+    },
+    filterbyType (state) {
+      return state.filterbyType
     }
   }
 })

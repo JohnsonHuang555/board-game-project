@@ -188,10 +188,10 @@ export default {
 
 <style lang="sass" scoped>
 nav
-  z-index: 999
+  z-index: 199
 
 .drawer
-  z-index: 1000 !important
+  z-index: 200 !important
 
 .account-avatar
   text-transform: none !important

@@ -2,10 +2,10 @@
   <div id="app">
     <v-app>
       <Header v-if="isShow"/>
-        <v-content>
-          <transition
-          name="fade"
-          mode="out-in"
+      <v-content>
+        <transition
+        name="fade"
+        mode="out-in"
         >
           <router-view/>
         </transition>

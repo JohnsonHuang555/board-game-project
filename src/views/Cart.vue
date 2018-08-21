@@ -1,10 +1,10 @@
 <template>
   <v-container grid-list-lg>
     <v-layout class="mb-4">
-      <v-flex md10>
+      <v-flex md10 xs8>
         <div class="page-title">租借清單</div>
       </v-flex>
-      <v-flex md2 class="cart-count">
+      <v-flex md2 xs4 class="cart-count">
         <div>共 {{ games.length }} 筆</div>
       </v-flex>
     </v-layout>
@@ -19,22 +19,22 @@
         </v-alert>
       </v-flex>
     </v-layout>
-    <v-layout class="game elevation-3 mb-4" v-for="game in games" :key="game.id">
+    <v-layout class="game elevation-3 mb-4" row wrap v-for="game in games" :key="game.id">
       <v-flex md12>
-        <v-layout>
-          <v-flex md3>
+        <v-layout row wrap>
+          <v-flex md3 xs12>
             <img :src="game.thumbnail" :alt="game.title">
           </v-flex>
-          <v-flex md5 class="game-info vertically-placed">
+          <v-flex md5 xs12 class="game-info vertically-placed">
             <div>
               <div class="game-title">{{ game.title }}</div>
               <div class="game-content">{{ game.previewText }}...</div>
             </div>
           </v-flex>
-          <v-flex md3 class="vertically-placed">
+          <v-flex md3 xs12 class="vertically-placed">
             <div class="game-deadline">租借期限 {{ convertTimes() }}</div>
           </v-flex>
-          <v-flex md1 class="vertically-placed">
+          <v-flex md1 xs12 class="vertically-placed">
             <v-icon color="error" style="cursor: pointer" @click="removeGame(game)">clear</v-icon>
           </v-flex>
         </v-layout>
@@ -52,13 +52,20 @@
           :disabled="games.length === 0 "
           solo>
         </v-select>
-        <v-btn color="primary" :disabled="games.length === 0 ">租借</v-btn>
+        <v-btn
+          color="primary"
+          :disabled="games.length === 0"
+          @click="rentGames">
+          租借
+        </v-btn>
       </v-flex>
     </v-layout>
+    <app-snackbar :txtSnackbar="txtSnackbar" @onDismissed="dismissedHandler" v-if="isShowSnackbar"/>
   </v-container>
 </template>
 
 <script>
+import { database } from 'firebase'
 var moment = require('moment')
 
 export default {
@@ -66,11 +73,13 @@ export default {
   data () {
     return {
       days: [
-        { text: '7' , value: 7},
-        { text: '14' , value: 14},
-        { text: '30' , value: 30}
+        { text: '7' , value: 7 },
+        { text: '14' , value: 14 },
+        { text: '30' , value: 30 }
       ],
-      rentDays: 7
+      rentDays: 7,
+      txtSnackbar: 'Rent successfully',
+      isShowSnackbar: false
     }
   },
   computed: {
@@ -86,6 +95,32 @@ export default {
       var vm = this
       const now = moment()
       return moment(now, "YYYY-MM-DD").add(vm.rentDays, 'days').format("YYYY-MM-DD")
+    },
+    rentGames () {
+      if (this.games.length === 0) {
+        return
+      }
+
+      const rentedGames = {
+        games: this.games,
+        time: moment().format('YYYY-MM-DD HH:mm:ss')
+      }
+
+      database().ref('rent-games/' + this.$store.getters.user.id).set(rentedGames)
+        .then(() => {
+          this.isShowSnackbar = true
+          this.$store.dispatch('clearRentCart')
+          setTimeout(() => {
+            this.isShowSnackbar = false
+          }, 4000)
+        })
+        .catch((error) => {
+          this.isShowSnackbar = false
+          console.log(error)
+        })
+    },
+    dismissedHandler () {
+      this.isShowSnackbar = false
     }
   }
 }

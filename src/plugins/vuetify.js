@@ -23,9 +23,11 @@ import {
   VMenu,
   VDialog,
   VProgressCircular,
+  VSnackbar,
   transitions
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
+import { Scroll } from 'vuetify/es5/directives'
 
 Vue.use(Vuetify, {
   components: {
@@ -50,7 +52,11 @@ Vue.use(Vuetify, {
     VMenu,
     VDialog,
     VProgressCircular,
+    VSnackbar,
     transitions
+  },
+  directives: {
+    Scroll
   },
   theme: {
     primary: '#78A1BB',
