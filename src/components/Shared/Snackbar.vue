@@ -3,7 +3,7 @@
     :value="true"
     bottom="bottom"
     right="right"
-    color="success"
+    :color="color"
     class="snackbar-text"
     :timeout="timeout">
       {{ txtSnackbar }}
@@ -27,6 +27,11 @@ export default {
     txtSnackbar: {
       type: String,
       default: "",
+      required: true
+    },
+    color: {
+      type: String,
+      default: "success",
       required: true
     }
   },

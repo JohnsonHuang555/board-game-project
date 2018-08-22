@@ -114,14 +114,29 @@ export default new Vuex.Store({
       commit('clearError')
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
         .then(
-          user => {
-            commit('setLoading', false)
-            const newUser = {
-              id: user.uid,
-              account: user.email,
-              rentCart: []
-            }
-            commit('setUser', newUser)
+          () => {
+            var currentUser = firebase.auth().currentUser
+            currentUser.updateProfile({
+              displayName: payload.phoneNumber
+            }).then(() => {
+              commit('setLoading', false)
+              const newUser = {
+                id: currentUser.uid,
+                account: currentUser.email,
+                phoneNumber: currentUser.displayName,
+                rentCart: []
+              }
+              commit('setUser', newUser)
+            }).catch((error) => {
+              console.log(error)
+            })
+            
+            currentUser.sendEmailVerification().then(() => {
+              console.log('success')
+            }).catch((error) => {
+              console.log(error)
+            })
+            
           }
         )
         .catch(
@@ -144,6 +159,7 @@ export default new Vuex.Store({
             const newUser = {
               id: user.uid,
               account: user.email,
+              phoneNumber: user.displayName,
               rentCart: []
             }
             commit('setUser', newUser)
@@ -160,7 +176,7 @@ export default new Vuex.Store({
         )
     },
     autoSignIn ({commit}, payload) {
-      commit('setUser', {id: payload.uid, account: payload.email, rentCart: []})
+      commit('setUser', {id: payload.uid, account: payload.email, phoneNumber: payload.displayName, rentCart: []})
     },
     logout ({commit}) {
       firebase.auth().signOut()

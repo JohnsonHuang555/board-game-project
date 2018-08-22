@@ -109,7 +109,7 @@
         </v-menu>
       </v-toolbar-items>
     </v-toolbar>
-    <app-dialog @logout="logoutHandler" v-if="isShowDialog"/>
+    <app-dialog :dialogAction="'logout'" :dialogContent="'您確定要登出?'" :dialogBtnConfirm="'Log Out'" @logout="logoutHandler" v-if="isShowDialog"/>
   </div>
 </template>
 
@@ -176,9 +176,9 @@ export default {
       else
         this.isShowDialog = true
     },
-    logoutHandler (val) {
+    logoutHandler (obj) {
       this.isShowDialog = false
-      if (val) {
+      if (obj.value) {
         this.onLogout()
       }
     }

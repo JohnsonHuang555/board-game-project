@@ -1,10 +1,10 @@
 <template>
   <v-container class="card-container">
-    <v-layout class="card elevation-3">
-      <v-flex class="left" md6>
+    <v-layout class="card elevation-3" row wrap>
+      <v-flex class="left" md6 xs12>
         <img src="../assets/dice.svg" width="512" height="512" alt="dice">
       </v-flex>
-      <v-flex class="right" md4 offset-md1>
+      <v-flex class="right" md4 offset-md1 xs12>
         <transition name="component-fade" mode="out-in">
           <SignInTemplate @signUp="signHandler" v-if="isSignIn"/>
           <SignUpTemplate @signIn="signHandler" v-else/>

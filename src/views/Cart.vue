@@ -60,7 +60,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    <app-snackbar :txtSnackbar="txtSnackbar" @onDismissed="dismissedHandler" v-if="isShowSnackbar"/>
+    <app-snackbar :txtSnackbar="txtSnackbar" :color="'success'" @onDismissed="dismissedHandler" v-if="isShowSnackbar"/>
   </v-container>
 </template>
 

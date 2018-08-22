@@ -5,6 +5,8 @@
       <v-text-field
         label="Email"
         prepend-icon="mail"
+        type="email"
+        :rules="[checkEmailFormat]"
         v-model="email"
       ></v-text-field>
       <v-text-field
@@ -19,6 +21,15 @@
         v-model="confirmPassword"
         type="password"
         :rules="[comparePasswords]"
+      ></v-text-field>
+      <v-text-field
+        label="Extension"
+        prepend-icon="phone"
+        v-model="phoneNumber"
+        counter
+        type="number"
+        maxlength="5"
+        :rules="[countNumber]"
       ></v-text-field>
       <app-alert class="mt-3" v-if="error" @dismissed="onDismissed" :text="error.message"></app-alert>
       <v-btn color="primary" large type="submit" :disabled="loading" :loading="loading">
@@ -36,12 +47,20 @@ export default {
     return {
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      phoneNumber: ''
     }
   },
   computed: {
     comparePasswords () {
       return this.password !== this.confirmPassword ? 'Passwords do not match.': true
+    },
+    countNumber () {
+      return this.phoneNumber.length > 5 ? 'Max 5 numbers' : true
+    },
+    checkEmailFormat () {
+      const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return !pattern.test(this.email) ? 'Invalid email' : true
     },
     user () {
       return this.$store.getters.user
@@ -65,7 +84,7 @@ export default {
       this.$emit('signIn', true)
     },
     onSignUp () {
-      this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
+      this.$store.dispatch('signUserUp', {email: this.email, password: this.password, phoneNumber: this.phoneNumber })
     },
     onDismissed () {
       this.$store.dispatch('clearError')
@@ -97,5 +116,5 @@ button
 h1
   font-weight: 500
   font-size: 36px
-  margin-bottom: 60px
+  margin-bottom: 40px
 </style>
