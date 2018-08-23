@@ -22,17 +22,21 @@ new Vue({
   render: h => h(App),
   created () {
     initializeApp({
-      apiKey: "AIzaSyB_IMKohcElAvNnAPi1PbGbyn44TCb87Xk",
-      authDomain: "rent-app-e75f5.firebaseapp.com",
-      databaseURL: "https://rent-app-e75f5.firebaseio.com",
-      projectId: "rent-app-e75f5",
-      storageBucket: "rent-app-e75f5.appspot.com",
+      apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+      authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+      databaseURL: process.env.VUE_APP_FIREBASE_BASE_URL,
+      projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+      storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
     })
-    auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.$store.dispatch('autoSignIn', user)
-      }
-    })
+
+    const isRememberMe = this.getCookies("RememberMe")
+    if (isRememberMe) {
+      auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.$store.dispatch('autoSignIn', user)
+        }
+      })
+    }
     this.$store.dispatch('loadedGames')
     this.$store.dispatch('loadedNews')
   },
