@@ -22,11 +22,17 @@ new Vue({
   render: h => h(App),
   created () {
     initializeApp({
-      apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
-      authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
-      databaseURL: process.env.VUE_APP_FIREBASE_BASE_URL,
-      projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
-      storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+      // apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+      // authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+      // databaseURL: process.env.VUE_APP_FIREBASE_BASE_URL,
+      // projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+      // storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+      apiKey: "AIzaSyB_IMKohcElAvNnAPi1PbGbyn44TCb87Xk",
+      authDomain: "rent-app-e75f5.firebaseapp.com",
+      databaseURL: "https://rent-app-e75f5.firebaseio.com",
+      projectId: "rent-app-e75f5",
+      storageBucket: "rent-app-e75f5.appspot.com",
+      messagingSenderId: "270879142605"
     })
 
     const isRememberMe = this.getCookies("RememberMe")
